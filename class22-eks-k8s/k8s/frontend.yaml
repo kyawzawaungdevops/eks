@@ -12,13 +12,13 @@ spec:
   template:
     metadata:
       labels:
-        app: myapp                   # Labels applied to pods
+        app: frontend                   # Labels applied to pods
     spec:
       containers:
-      - name: myapp-container
+      - name: frontend-container
         image: testingkyaw/my-node-app:v2  # Container image
         ports:
-        - containerPort: 8000         # Port exposed by container
+        - containerPort: 3000         # Port exposed by container
         env:                        # Environment variables (optional)
         - name: BACKEND_URL
           value: "http://backend:8000"

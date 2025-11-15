@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 3                          # Number of pod replicas
+  selector:
+    matchLabels:
+      app: backend                     # Label selector for pods
+  template:
+    metadata:
+      labels:
+        app: backend                   # Labels applied to pods
+    spec:
+      containers:
+      - name: backend-container
+        image: testingkyaw/my-python-app:v2  # Container image
+        ports:
+        - containerPort: 8000         # Port exposed by container
+        env:                        # Environment variables (optional)
+        - name: FLASK_DEBUG
+          value: "1"
+        - name: FLASK_APP
+          value: "run.py"
+        - name: DATABASE_URL
+          value: "postgresql://postgres:postgres@db:5432/devops_learning"
+        - name: SECRET_KEY
+          value: "your-secret-key-here"
+        - name: DB_HOST
+          value: "db"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_NAME
+          value: "devops_learning"
+        - name: DB_USERNAME
+          value: "postgres"
+        - name: DB_PASSWORD
+          value: "postgres"
+        - name: ALLOWED_ORIGINS
+          value: "http://localhost:3000,http://localhost:80"         
+        resources:                   # Resource requests/limits (optional)
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+
