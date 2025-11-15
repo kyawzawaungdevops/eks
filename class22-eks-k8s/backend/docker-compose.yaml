@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres2
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata2:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    image: python-backend:v3
+    container_name: backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      FLASK_APP: run.py
+      FLASK_DEBUG: "1"
+      # Use the service name "postgres" as the hostname for in-network access
+      DATABASE_URL: postgresql://username:password@postgres2:5432/mydb
+      SECRET_KEY: your-secret-key-here
+    ports:
+      - "8000:8000"
+    # Ensure your Flask app binds to 0.0.0.0 inside the container
+
+volumes:
+  pgdata2:

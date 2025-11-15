@@ -89,14 +89,14 @@ pip install -r requirements.txt
 ```env
 FLASK_APP=run.py
 FLASK_DEBUG=1
-DATABASE_URL=postgresql://username:password@localhost:5432/devops_learning
+DATABASE_URL=postgresql://username:password@localhost:5432/mydb
 SECRET_KEY=your-secret-key-here
 ```
 
 5. Create PostgreSQL database:
 ```bash
 psql -U postgres
-CREATE DATABASE devops_learning;
+CREATE DATABASE mydb;
 ```
 
 6. Run database migrations:
