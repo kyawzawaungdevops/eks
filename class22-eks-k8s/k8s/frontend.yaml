@@ -5,28 +5,43 @@ metadata:
   labels:
     app: frontend
 spec:
-  replicas: 3                          # Number of pod replicas
+  replicas: 3
   selector:
     matchLabels:
-      app: frontend                     # Label selector for pods
+      app: frontend
   template:
     metadata:
       labels:
-        app: frontend                   # Labels applied to pods
+        app: frontend
     spec:
       containers:
       - name: frontend-container
-        image: testingkyaw/my-node-app:v2  # Container image
+        image: testingkyaw/my-node-app:v2
         ports:
-        - containerPort: 3000         # Port exposed by container
-        env:                        # Environment variables (optional)
+        - containerPort: 3000
+        env:
         - name: BACKEND_URL
-          value: "http://backend:8000"
-        resources:                   # Resource requests/limits (optional)
+          value: "http://backend-service:8000"
+        resources:
           requests:
             memory: "128Mi"
             cpu: "250m"
           limits:
             memory: "256Mi"
             cpu: "500m"
-
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  labels:
+    app: frontend
+spec:
+  type: LoadBalancer              # External access for frontend
+  selector:
+    app: frontend
+  ports:
+  - protocol: TCP
+    port: 80                      # External port (users access on port 80)
+    targetPort: 3000              # Container port
+    name: http
