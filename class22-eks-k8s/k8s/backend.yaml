@@ -25,21 +25,21 @@ spec:
         - name: FLASK_APP
           value: "run.py"
         - name: DATABASE_URL
-          value: "postgresql://postgres:postgres@db:5432/devops_learning"
+          value: "postgresql://ciscobase.cds1wi0qiwop.us-east-1.rds.amazonaws.com:postgres@Cisco123:5432/app"
         - name: SECRET_KEY
           value: "your-secret-key-here"
         - name: DB_HOST
-          value: "db"
+          value: "ciscobase.cds1wi0qiwop.us-east-1.rds.amazonaws.com"
         - name: DB_PORT
           value: "5432"
         - name: DB_NAME
-          value: "devops_learning"
+          value: "app"
         - name: DB_USERNAME
           value: "postgres"
         - name: DB_PASSWORD
-          value: "postgres"
+          value: "Cisco123"
         - name: ALLOWED_ORIGINS
-          value: "http://localhost:3000,http://localhost:80"         
+          value: "http://localhost:3000,http://localhost:80"       
         resources:                   # Resource requests/limits (optional)
           requests:
             memory: "128Mi"
