@@ -14,11 +14,11 @@ spec:
         - name: FLASK_APP
           value: "run.py"
         - name: DATABASE_URL
-          value: "postgresql://ciscobase.cds1wi0qiwop.us-east-1.rds.amazonaws.com:postgres@Cisco123:5432/app"
+          value: "postgresql://app.ctgn08lmqtl7.us-east-1.rds.amazonaws.com:postgres@Cisco123:5432/app"
         - name: SECRET_KEY
           value: "your-secret-key-here"
         - name: DB_HOST
-          value: "ciscobase.cds1wi0qiwop.us-east-1.rds.amazonaws.com"
+          value: "app.ctgn08lmqtl7.us-east-1.rds.amazonaws.com"
         - name: DB_PORT
           value: "5432"
         - name: DB_NAME
